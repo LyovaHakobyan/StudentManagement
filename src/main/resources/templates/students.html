@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/table.css">
+    <title>Students</title>
+</head>
+<body>
+
+<div class="left">
+    <table>
+
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Picture</th>
+            <th>Lesson Name</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+
+        <tr th:each="student : ${students}">
+            <td th:text="${student.id}">
+            </td>
+            <td th:text="${student.name}">
+            </td>
+            <td th:text="${student.surname}">
+            </td>
+            <td th:text="${student.email}">
+            </td>
+            <td th:if="${student.picName != null}"><img th:src="'/downloadPic/' + ${student.picName}" alt="No Img" style="width: 60px;">
+            </td>
+            <td th:if="${student.picName == null}">No Picture
+            </td>
+            <td th:if="${student.getLesson() != null}" th:text="${student.lesson.title}">
+            </td>
+            <td th:if="${student.getLesson() == null}">No Lesson
+            </td>
+            <td><a th:href="'/students/delete/' + ${student.id}">
+                <button>Delete</button>
+            </a>
+            </td>
+            <td><a th:href="'/students/update/' + ${student.id}">
+                <button>Update</button>
+            </a>
+            </td>
+
+    </table>
+</div>
+
+<div class="add__div"><p class="add"><a href="/students/add">Add New Student</a></p></div>
+<div class="add__div"><p class="add"><a href="/">Back To Home</a></p></div>
+
+</body>
+</html>

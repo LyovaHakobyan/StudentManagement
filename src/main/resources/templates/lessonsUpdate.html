@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/entityAdd.css">
+    <title>Update Lesson</title>
+</head>
+<body>
+
+<div class="msg" th:if="${!msg.isEmpty()}"><p class="msg__p" th:text="${msg}"></p></div>
+
+<div class="left">
+
+    <form action="/lessons/update" method="post" autocomplete="off" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${lesson.id}">
+        <label for="title">Title
+            <input type="text" name="title" id="title" th:value="${lesson.title}" required>
+        </label>
+        <label for="duration">Duration
+            <input type="number" name="duration" id="duration" th:value="${lesson.duration}" required min="0">
+        </label>
+        <label for="price">Price
+            <input type="number" name="price" id="price" th:value="${lesson.price}" required min="0">
+        </label>
+        <label for="startingDate">Start Date
+            <input type="date" name="startingDate" id="startingDate"
+                   th:value="${lesson.startDate.toString().substring(0,10)}" required
+                   style="width: 12%">
+        </label>
+        <label for="teacherId">Teacher
+
+            <select name="teacherId" id="teacherId" required>
+                <option th:if="${lesson.teacher != null}" th:each="teacher : ${teachers}" th:value="${teacher.id}"
+                        th:text="${teacher.name} + ' ' + ${teacher.surname}"
+                        th:selected="${teacher.id == lesson.teacher.id}">
+                </option>
+                <option th:if="${lesson.teacher == null}" th:each="teacher : ${teachers}" th:value="${teacher.id}"
+                        th:text="${teacher.name} + ' ' + ${teacher.surname}">
+                </option>
+            </select>
+
+        </label>
+        <input type="submit" value="Update Lesson" class="sbm">
+    </form>
+
+</div>
+
+<div class="add__div"><p class="add"><a href="/">Back To Home</a></p></div>
+
+</body>
+</html>

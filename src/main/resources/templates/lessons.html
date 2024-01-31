@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/table.css">
+    <title>Lessons</title>
+</head>
+<body>
+
+<div class="left">
+    <table>
+
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Duration</th>
+            <th>Price</th>
+            <th>Start Date</th>
+            <th>Teacher Name</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+
+        <tr th:each="lesson : ${lessons}">
+            <td th:text="${lesson.id}">
+            </td>
+            <td th:text="${lesson.title}">
+            </td>
+            <td th:text="${lesson.duration}">
+            </td>
+            <td th:text="${lesson.price}">
+            </td>
+            <td th:text="${lesson.startDate.toString().substring(0,10)}">
+            </td>
+            <td th:if="${lesson.teacher != null}" th:text="${lesson.teacher.name} + ' ' + ${lesson.teacher.surname}">
+            </td>
+            <td th:if="${lesson.teacher == null}">No Teacher
+            </td>
+            <td><a th:href="'/lessons/delete/' + ${lesson.id}">
+                <button>Delete</button>
+            </a>
+            </td>
+            <td><a th:href="'/lessons/update/' + ${lesson.id}">
+                <button>Update</button>
+            </a>
+            </td>
+
+    </table>
+</div>
+
+<div class="add__div"><p class="add"><a href="/lessons/add">Add New Lesson</a></p></div>
+<div class="add__div"><p class="add"><a href="/">Back To Home</a></p></div>
+
+</body>
+</html>

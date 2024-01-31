@@ -1,0 +1,64 @@
+.left {
+    display: flex;
+    margin: 20px auto;
+    justify-content: center;
+    width: 86%;
+}
+
+
+table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid black;
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tbody {
+    background-color: #c1f3c3;
+}
+
+table button {
+    background-color: #016501;
+    color: white;
+}
+
+table button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.add {
+    text-align: center;
+    font-size: 25px;
+}
+
+.add__div {
+    margin: 20px auto;
+    width: 12%;
+}
+
+.add:hover {
+    transform: scale(1.1);
+}
+
+.add a {
+    color: #005700;
+    text-decoration: none;
+}

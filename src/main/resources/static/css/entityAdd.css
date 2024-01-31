@@ -1,0 +1,65 @@
+.left {
+    display: flex;
+    margin: 20px auto;
+    justify-content: center;
+    width: 86%;
+}
+
+form {
+    margin: 20px auto;
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.sbm {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.sbm:hover {
+    background-color: green;
+    transform: scale(1.05);
+}
+
+.add__div {
+    margin: 20px auto;
+    width: 12%;
+}
+
+.add:hover {
+    transform: scale(1.05);
+}
+
+.add a {
+    color: #005700;
+    text-decoration: none;
+}
+
+.add {
+    text-align: center;
+    font-size: 25px;
+}
+
+.msg {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.msg__p {
+    margin: 20px auto;
+    color: red;
+    font-size: 25px;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/table.css">
+    <title>Teachers</title>
+</head>
+<body>
+
+<div class="left">
+    <table>
+
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Picture</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+
+        <tr th:each="teacher : ${teachers}">
+            <td th:text="${teacher.id}">
+            </td>
+            <td th:text="${teacher.name}">
+            </td>
+            <td th:text="${teacher.surname}">
+            </td>
+            <td th:text="${teacher.email}">
+            </td>
+            <td th:if="${teacher.picName != null}"><img th:src="'/downloadPic/' + ${teacher.picName}" alt="No Img" style="width: 60px;">
+            </td>
+            <td th:if="${teacher.picName == null}">No Picture
+            </td>
+            <td><a th:href="'/teachers/delete/' + ${teacher.id}">
+                <button>Delete</button>
+            </a>
+            </td>
+            <td><a th:href="'/teachers/update/' + ${teacher.id}">
+                <button>Update</button>
+            </a>
+            </td>
+
+    </table>
+</div>
+
+<div class="add__div"><p class="add"><a href="/teachers/add">Add New Teacher</a></p></div>
+<div class="add__div"><p class="add"><a href="/">Back To Home</a></p></div>
+
+</body>
+</html>

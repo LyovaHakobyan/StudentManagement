@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/entityAdd.css">
+    <title>Update Teacher</title>
+</head>
+<body>
+
+<div class="msg" th:if="${!msg.isEmpty()}"><p class="msg__p" th:text="${msg}"></p></div>
+
+<div class="left">
+
+    <form action="/teachers/update" method="post" autocomplete="off" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${teacher.id}">
+        <label for="name">Name
+            <input type="text" name="name" id="name" th:value="${teacher.name}" required>
+        </label>
+        <label for="surname">Surname
+            <input type="text" name="surname" id="surname" th:value="${teacher.surname}" required>
+        </label>
+        <label for="email">Email
+            <input type="email" name="email" id="email" th:value="${teacher.email}" required>
+        </label>
+        <label for="img">Picture
+            <img th:if="${teacher.picName != null}" th:src="'/downloadPic/' + ${teacher.picName}" alt="No Image"
+                 style="width: 90px;">
+            <input type="file" name="picture" id="img">
+        </label>
+        <input type="submit" value="Update Teacher" class="sbm">
+    </form>
+
+</div>
+
+<div class="add__div"><p class="add"><a href="/">Back To Home</a></p></div>
+
+</body>
+</html>

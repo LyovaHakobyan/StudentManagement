@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/entityAdd.css">
+    <title>Add Teacher</title>
+</head>
+<body>
+
+<div class="msg" th:if="${!msg.isEmpty()}"><p class="msg__p" th:text="${msg}"></p></div>
+
+<div class="left">
+
+    <form action="/teachers/add" method="post" autocomplete="off" enctype="multipart/form-data">
+        <label for="name">Name
+            <input type="text" name="name" id="name" required>
+        </label>
+        <label for="surname">Surname
+            <input type="text" name="surname" id="surname" required>
+        </label>
+        <label for="email">Email
+            <input type="email" name="email" id="email" required>
+        </label>
+        <label for="img">Picture
+            <input type="file" name="picture" id="img">
+        </label>
+        <input type="submit" value="Add Teacher" class="sbm">
+    </form>
+
+</div>
+
+<div class="add__div"><p class="add"><a href="/">Back To Home</a></p></div>
+
+</body>
+</html>
