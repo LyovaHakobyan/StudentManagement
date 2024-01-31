@@ -7,6 +7,7 @@ import com.example.studentmanagement.repository.LessonRepository;
 import com.example.studentmanagement.repository.UserRepository;
 import com.example.studentmanagement.util.StudentReqChecker;
 import com.example.studentmanagement.util.TeacherReqChecker;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class StudentController {
 
     @Value("${user.pic.file.path}")
@@ -27,12 +29,6 @@ public class StudentController {
 
     private final UserRepository userRepository;
     private final LessonRepository lessonRepository;
-
-    @Autowired
-    public StudentController(UserRepository userRepository, LessonRepository lessonRepository) {
-        this.userRepository = userRepository;
-        this.lessonRepository = lessonRepository;
-    }
 
     @GetMapping("/students")
     public String getStudentsPage(ModelMap modelMap) {

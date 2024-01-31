@@ -7,6 +7,7 @@ import com.example.studentmanagement.repository.LessonRepository;
 import com.example.studentmanagement.repository.UserRepository;
 import com.example.studentmanagement.util.DateUtil;
 import com.example.studentmanagement.util.LessonReqChecker;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,16 +19,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class LessonController {
 
     private final UserRepository userRepository;
     private final LessonRepository lessonRepository;
 
-    @Autowired
-    public LessonController(UserRepository userRepository, LessonRepository lessonRepository) {
-        this.userRepository = userRepository;
-        this.lessonRepository = lessonRepository;
-    }
 
     @GetMapping("/lessons")
     public String getLessonsPage(ModelMap modelMap) {
