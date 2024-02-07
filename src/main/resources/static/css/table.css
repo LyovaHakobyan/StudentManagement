@@ -62,3 +62,7 @@ table button:hover {
     color: #005700;
     text-decoration: none;
 }
+
+.teacherImg {
+    width: 60px;
+}

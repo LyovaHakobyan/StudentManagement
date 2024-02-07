@@ -7,11 +7,11 @@
 </head>
 <body>
 
-<div class="msg" th:if="${!msg.isEmpty()}"><p class="msg__p" th:text="${msg}"></p></div>
+<th:block th:insert="/fragment/errorFragment::error"/>
 
 <div class="left">
 
-    <form action="/lessons/add" method="post" autocomplete="off" enctype="multipart/form-data">
+    <form action="/lessons/add" method="post" autocomplete="off">
         <label for="title">Title
             <input type="text" name="title" id="title" required>
         </label>
@@ -21,16 +21,8 @@
         <label for="price">Price
             <input type="number" name="price" id="price" required min="0">
         </label>
-        <label for="startingDate">Start Date
-            <input type="date" name="startingDate" id="startingDate" required style="width: 12%">
-        </label>
-        <label for="teacherId">Teacher
-
-            <select name="teacherId" id="teacherId" required>
-                <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.name} + ' ' + ${teacher.surname}">
-                </option>
-            </select>
-
+        <label for="startDate">Start Date
+            <input type="date" name="startDate" id="startDate" required style="width: 12%">
         </label>
         <input type="submit" value="Add Lesson" class="sbm">
     </form>

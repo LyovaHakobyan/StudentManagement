@@ -45,3 +45,30 @@
     height: 100%;
     width: 7%;
 }
+
+.out {
+    margin-top: 7%;
+    height: 140px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.out button {
+    height: 100%;
+    width: 180px;
+    color: white;
+    font-size: 20px;
+    background-color: #51800b;
+    transition: 0.3s;
+}
+
+.out button:hover {
+    transform: scale(1.05);
+    background-color: #026702;
+    cursor: pointer;
+}
+
+.out a {
+    height: 50%;
+}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p th:fragment="error" th:if="${err != null}" th:text="${err}" class="err"></p>
+
+<p th:fragment="errorJs" id="msg" class="err"></p>
+
+<div th:fragment="errorDiv" th:if="${err != null}" class="msg"><p th:text="${err}" class="msg__p"></p></div>
+
+</body>
+</html>

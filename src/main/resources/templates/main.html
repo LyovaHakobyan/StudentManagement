@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
@@ -11,7 +11,8 @@
 <div class="center">
 
     <a href="/students">
-        <button>Students</button>
+        <button th:if="${user.userType.name().equals('TEACHER')}">Students</button>
+        <button th:if="${user.userType.name().equals('STUDENT')}">Classmates</button>
     </a>
 
     <div class="empty"></div>
@@ -26,6 +27,15 @@
         <button class="for">Lessons</button>
     </a>
 </div>
+
+<div class="out">
+
+    <a href="/logout">
+        <button>Logout</button>
+    </a>
+
+</div>
+
 
 </body>
 </html>

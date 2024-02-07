@@ -16,8 +16,6 @@
             <th>Surname</th>
             <th>Email</th>
             <th>Picture</th>
-            <th>Delete</th>
-            <th>Update</th>
         </tr>
 
         <tr th:each="teacher : ${teachers}">
@@ -29,23 +27,15 @@
             </td>
             <td th:text="${teacher.email}">
             </td>
-            <td th:if="${teacher.picName != null}"><img th:src="'/downloadPic/' + ${teacher.picName}" alt="No Img" style="width: 60px;">
+            <td th:if="${teacher.picName != null}"><img th:src="'/downloadPic/' + ${teacher.picName}" alt="Teacher Img"
+                                                        class="teacherImg">
             </td>
             <td th:if="${teacher.picName == null}">No Picture
-            </td>
-            <td><a th:href="'/teachers/delete/' + ${teacher.id}">
-                <button>Delete</button>
-            </a>
-            </td>
-            <td><a th:href="'/teachers/update/' + ${teacher.id}">
-                <button>Update</button>
-            </a>
             </td>
 
     </table>
 </div>
 
-<div class="add__div"><p class="add"><a href="/teachers/add">Add New Teacher</a></p></div>
 <div class="add__div"><p class="add"><a href="/">Back To Home</a></p></div>
 
 </body>

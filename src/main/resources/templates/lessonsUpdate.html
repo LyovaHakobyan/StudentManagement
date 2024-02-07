@@ -7,11 +7,11 @@
 </head>
 <body>
 
-<div class="msg" th:if="${!msg.isEmpty()}"><p class="msg__p" th:text="${msg}"></p></div>
+<th:block th:insert="/fragment/errorFragment::errorDiv"/>
 
 <div class="left">
 
-    <form action="/lessons/update" method="post" autocomplete="off" enctype="multipart/form-data">
+    <form action="/lessons/update" method="post" autocomplete="off">
         <input type="hidden" name="id" th:value="${lesson.id}">
         <label for="title">Title
             <input type="text" name="title" id="title" th:value="${lesson.title}" required>
@@ -22,23 +22,10 @@
         <label for="price">Price
             <input type="number" name="price" id="price" th:value="${lesson.price}" required min="0">
         </label>
-        <label for="startingDate">Start Date
-            <input type="date" name="startingDate" id="startingDate"
-                   th:value="${lesson.startDate.toString().substring(0,10)}" required
+        <label for="startDate">Start Date
+            <input type="date" name="startDate" id="startDate"
+                   th:value="${#dates.format(lesson.startDate, 'yyyy-MM-dd')}" required
                    style="width: 12%">
-        </label>
-        <label for="teacherId">Teacher
-
-            <select name="teacherId" id="teacherId" required>
-                <option th:if="${lesson.teacher != null}" th:each="teacher : ${teachers}" th:value="${teacher.id}"
-                        th:text="${teacher.name} + ' ' + ${teacher.surname}"
-                        th:selected="${teacher.id == lesson.teacher.id}">
-                </option>
-                <option th:if="${lesson.teacher == null}" th:each="teacher : ${teachers}" th:value="${teacher.id}"
-                        th:text="${teacher.name} + ' ' + ${teacher.surname}">
-                </option>
-            </select>
-
         </label>
         <input type="submit" value="Update Lesson" class="sbm">
     </form>

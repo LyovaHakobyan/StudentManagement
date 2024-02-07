@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+
+<div th:each="message : ${messages}" class="chat-container">
+    <div th:if="${message.user1.id != user.id}" class="chat-box user1">
+        <div class="message">
+            <div class="user-name" th:text="${message.user1.name}"></div>
+            <p th:text="${message.message}"></p>
+            <div class="time" th:text="${#dates.format(message.messageDate, 'dd-MM-yyyy hh:mm')}"></div>
+        </div>
+    </div>
+    <div th:if="${message.user1.id == user.id}" class="chat-box user2">
+        <div class="message">
+            <div class="user-name" th:text="${message.user1.name}"></div>
+            <p th:text="${message.message}"></p>
+            <div class="time" th:text="${#dates.format(message.messageDate, 'dd-MM-yyyy hh:mm')}"></div>
+        </div>
+    </div>
+</div>
+
+<div class="input-area">
+    <form action="/students/chat" method="post">
+        <input type="hidden" name="toId" th:value="${toId}">
+        <input type="text" name="message" placeholder="Type your message...">
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<a class="go-home-button" href="/students">Go Home</a>
+
+</body>
+</html>
