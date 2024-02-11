@@ -13,7 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -30,25 +34,25 @@ public class MainController {
     @Value("${user.pic.file.path}")
     private String picFilePath;
 
-    @GetMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getMainPage() {
         return "main";
     }
 
-    @GetMapping(value = "/downloadPic/{picName}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @RequestMapping(value = "/downloadPic/{picName}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<Resource> downloadPic(@PathVariable("picName") String picName) {
         return pictureService.downloadPicture(picName);
     }
 
-    @GetMapping("/login")
-    public String getLoginPage(@RequestParam(value = "error",required = false) String error, ModelMap modelMap, @AuthenticationPrincipal SpringUser springUser) {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String getLoginPage(@RequestParam(value = "error", required = false) String error, ModelMap modelMap, @AuthenticationPrincipal SpringUser springUser) {
         if (error != null && error.equals("true")) {
             modelMap.put("err", "Wrong Email, Or Password");
         }
         return "login";
     }
 
-    @GetMapping("/register")
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getRegisterPage(@RequestParam(value = "error", required = false) String error, ModelMap modelMap, @AuthenticationPrincipal SpringUser springUser) {
         if (error != null) {
             modelMap.put("err", error);
@@ -56,7 +60,7 @@ public class MainController {
         return "register";
     }
 
-    @PostMapping("/register")
+    @RequestMapping(value = "register", method = RequestMethod.POST)
     public String register(@ModelAttribute("newUser") User user, @RequestParam("picture") MultipartFile multipartFile) {
         if (RegisterReqChecker.emptyReq(user) || RegisterReqChecker.wrongUserType(user.getUserType().name())) {
             String err = "Empty Request, Try Again";

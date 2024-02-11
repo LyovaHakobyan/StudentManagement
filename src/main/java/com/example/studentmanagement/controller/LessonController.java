@@ -8,7 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,14 +23,14 @@ public class LessonController {
 
     private final LessonService lessonService;
 
-    @GetMapping("/lessons")
+    @RequestMapping(value = "/lessons", method = RequestMethod.GET)
     public String getLessonsPage(ModelMap modelMap) {
         List<Lesson> lessons = lessonService.findAll();
         modelMap.put("lessons", lessons);
         return "lessons";
     }
 
-    @GetMapping("/lessons/add")
+    @RequestMapping(value = "/lessons/add", method = RequestMethod.GET)
     public String getLessonAddPage(@RequestParam(value = "error", required = false) String error, ModelMap modelMap) {
         if (error != null) {
             modelMap.put("err", error);
@@ -34,7 +38,7 @@ public class LessonController {
         return "lessonsAdd";
     }
 
-    @PostMapping("/lessons/add")
+    @RequestMapping(value = "/lessons/add", method = RequestMethod.POST)
     public String addLesson(@ModelAttribute Lesson lesson, @AuthenticationPrincipal SpringUser springUser) {
         if (LessonReqChecker.emptyReq(lesson)) {
             String err = "Empty Request, Try Again";
@@ -44,7 +48,7 @@ public class LessonController {
         return "redirect:/lessons";
     }
 
-    @GetMapping("/lessons/delete/{id}")
+    @RequestMapping(value = "/lessons/delete/{id}", method = RequestMethod.GET)
     public String deleteLesson(@PathVariable int id) {
         Optional<Lesson> byId = lessonService.findById(id);
         if (byId.isEmpty() || byId.get().getId() == 0) {
@@ -55,7 +59,7 @@ public class LessonController {
         return "redirect:/lessons";
     }
 
-    @GetMapping("/lessons/update/{id}")
+    @RequestMapping(value = "/lessons/update/{id}", method = RequestMethod.GET)
     public String getLessonUpdatePage(@RequestParam(value = "error", required = false) String error, @PathVariable int id, ModelMap modelMap) {
         if (error != null) {
             modelMap.put("err", error);
@@ -69,7 +73,7 @@ public class LessonController {
         return "lessonsUpdate";
     }
 
-    @PostMapping("/lessons/update")
+    @RequestMapping(value = "/lessons/update", method = RequestMethod.POST)
     public String updateLesson(@ModelAttribute Lesson newLesson, @AuthenticationPrincipal SpringUser springUser) {
         if (LessonReqChecker.emptyReq(newLesson)) {
             String err = "Empty Request, Try Again";
@@ -84,7 +88,7 @@ public class LessonController {
         return "redirect:/lessons";
     }
 
-    @GetMapping("/lessons/startLesson/{id}")
+    @RequestMapping(value = "/lessons/startLesson/{id}", method = RequestMethod.GET)
     public String startLessonPage(@PathVariable("id") int lessonId, @AuthenticationPrincipal SpringUser springUser) {
         Optional<Lesson> byId = lessonService.findById(lessonId);
         if (byId.isEmpty() || byId.get().getId() == 0) {

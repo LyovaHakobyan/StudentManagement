@@ -11,9 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class MessageController {
 
     private final UserService userService;
 
-    @GetMapping("/students/chat/{toId}")
+    @RequestMapping(value = "/students/chat/{toId}", method = RequestMethod.GET)
     public String getChatPage(@PathVariable int toId, @AuthenticationPrincipal SpringUser springUser, ModelMap modelMap) {
         User user2 = userService.findById(toId);
         User user1 = springUser.getUser();
@@ -39,7 +39,7 @@ public class MessageController {
         return "chat";
     }
 
-    @PostMapping("/students/chat")
+    @RequestMapping(value = "/students/chat", method = RequestMethod.POST)
     public String saveMessage(@RequestParam("toId") int toId, @RequestParam("message") String message, @AuthenticationPrincipal SpringUser springUser, ModelMap modelMap) {
         if (MessageReqChecker.emptyReq(message)) {
             return "redirect:/students";
